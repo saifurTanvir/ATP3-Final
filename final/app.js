@@ -3,6 +3,7 @@ var express = require('express');
 //var employee = require('./controllers/employee');
 var admin = require('./controllers/admin');
 var customer = require('./controllers/customer');
+var login = require('./controllers/login');
 //var logout = require('./controllers/logout');
 var ejs = require('ejs');
 var exSession = require('express-session');
@@ -20,8 +21,9 @@ app.use(cookieParser());
 
 app.use('/abc', express.static('xyz'));
 
-app.use('/register', admin);
-app.use('/register', customer);
+app.use('/admin', admin);
+app.use('/customer', customer);
+app.use('/login', login);
 
 
 

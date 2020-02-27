@@ -1,9 +1,9 @@
 var express = require('express'); 
 var router = express.Router();
-var adminModel = require.main.require('./models/admin-model');
+var customerModel = require.main.require('./models/customer-model');
 
 router.get("/", function(req, res){
-	res.render("admin/register");
+	res.render("customer/register");
 });
 
 router.post("/", function(req, res){
@@ -14,20 +14,20 @@ router.post("/", function(req, res){
 		password: req.body.password
 	}
 
-	adminModel.insert(data, function(status){
+	customerModel.insert(data, function(status){
 		if(status){
-			console.log("Employee register success!");
+			console.log("Customer register success!");
 			res.redirect("/login");
 		}
 		else{
-			console.log("Employee register fails!!!");
+			console.log("Customer register fails!!!");
 		}
 	});
 
 });
 
 router.get("/home", function(req, res){
-	res.render("admin/home");
+	res.render("customer/home");
 });
 
 
