@@ -46,6 +46,26 @@ router.get("/edit", function(req, res){
 	});
 });
 
+router.post('/edit/:id', function(req, res){
+	
+		var user = {
+			id: req.params.id, 
+			name: req.body.name,
+			username: req.body.username,
+			type: req.body.type,
+			password: req.body.password
+			
+		};
+
+		adminModel.update(user, function(status){
+			if(status){
+				res.redirect('/admin/edit/'+req.params.id);       
+			}else{
+				res.redirect('/admin/edit/'+req.params.id);
+			}
+		});
+});
+
 
 router.get("/addMadicine", function(req, res){
 	res.render("admin/addMadicine")
@@ -95,7 +115,7 @@ router.post('/editMadicine/:id', function(req, res){
 		var user = {
 			name: req.body.name,
 			catagory: req.body.catagory,
-			subCatagory: req.body.subcatagory,
+			subcatagory: req.body.subcatagory,
 			vname: req.body.vname,
 			price: req.body.price,
 			quantity: req.body.quantity	

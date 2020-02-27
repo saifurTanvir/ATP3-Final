@@ -84,7 +84,7 @@ module.exports= {
 		console.log("InMadicine")
 		var sql = "update madicine set name=?, catagory=?, subcatagory=?, vname=?, price=?, quantity=? where id=?";
 		db.execute(sql, [user.name, user.catagory, user.subcatagory, user.vname, user.price, user.quantity, user.id], function(status){
-			console.log("Status");
+			console.log(status);
 			if(status){
 				callback(true);
 			}else{
@@ -95,6 +95,17 @@ module.exports= {
 	deleteMadicine: function(user, callback){
 		var sql = "delete from madicine where id=?";
 		db.execute(sql, [user], function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+	},
+	update : function(user, callback){
+		var sql = "update admin set name=?, username=?, type=?, password=? where id=?";
+		db.execute(sql, [user.name, user.username, user.type, user.password, user.id], function(status){
+			console.log(status)
 			if(status){
 				callback(true);
 			}else{
