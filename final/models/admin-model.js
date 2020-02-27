@@ -34,5 +34,20 @@ module.exports= {
 				callback(null);
 			}
 		});
+	},
+	addMadicine: function(user, callback){
+		var sql = "insert into madicine values(?,?,?,?,?,?,?)";
+		db.execute(sql, [null, user.name, user.catagory, user.subCatagory, user.vname, user.price,  user.quantity], function(status){
+			console.log(status);
+			if(status){
+				console.log("Okay");
+				
+				callback(true);
+			}else{
+				console.log("Not Okay")
+
+				callback(false);
+			}
+		});
 	}
 }
