@@ -16,7 +16,7 @@ module.exports= {
 		});
 	},
 	getAll : function(callback){
-		var sql = "select * from emplyee";
+		var sql = "select * from admin";
 		db.getResults(sql, null, function(results){
 			if(results.length > 0){
 				callback(results);
@@ -26,7 +26,7 @@ module.exports= {
 		});
 	},
 	getById : function(id, callback){
-		var sql = "select * from emplyee where id=?";
+		var sql = "select * from admin where id=?";
 		db.getResults(sql, [id], function(results){
 			if(results.length > 0){
 				callback(results[0]);

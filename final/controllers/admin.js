@@ -2,6 +2,14 @@ var express = require('express');
 var router = express.Router();
 var adminModel = require.main.require('./models/admin-model');
 
+router.get('*', function(req, res, next){
+	if(req.cookies['username'] == null){
+		res.redirect('/login');
+	}else{
+		next();
+	}
+});
+
 router.get("/", function(req, res){
 	res.render("admin/register");
 });
@@ -27,8 +35,17 @@ router.post("/", function(req, res){
 });
 
 router.get("/home", function(req, res){
-	res.render("admin/home");
+	res.render("admin/home")
+	
 });
+
+router.get("/edit", function(req, res){
+	adminModel.getById(req.cookies['username'], function(result){
+		console.log(result);
+		res.render('admin/edit', {user: result});
+	});
+});
+
 
 
 module.exports = router;

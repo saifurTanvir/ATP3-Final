@@ -17,12 +17,12 @@ router.post('/', function(req, res){
 	userModel.validate(user, function(results){
 		//console.log(results.type);
 	 	if(results.type == "admin"){
-			//res.cookie('username', req.body.uname);
-			res.redirect('/admin/home');
+			res.cookie('username', req.body.uname);
+			res.redirect('/admin/home/');
 		}
 		else if(results.type == "customer"){
-			//res.cookie('username', req.body.uname);
-			res.redirect('/customer/home');
+			res.cookie('username', req.body.uname);
+			res.redirect('/customer/home/');
 		}else{
 			res.send('invalid username/password');
 		}
