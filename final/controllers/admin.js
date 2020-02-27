@@ -40,8 +40,8 @@ router.get("/home", function(req, res){
 });
 
 router.get("/edit", function(req, res){
-	adminModel.getById(req.cookies['username'], function(result){
-		//console.log(result);
+	console.log(req.cookies['username']);
+	adminModel.getByUname(req.cookies['username'], function(result){
 		res.render('admin/edit', {user: result});
 	});
 });
@@ -73,6 +73,57 @@ router.post("/addMadicine", function(req, res){
 	});
 	
 });
+
+router.get("/controlMadicine", function(req, res){
+	adminModel.getAllMadicine(function(results){
+		if(results.length > 0){
+			res.render('admin/controlMadicine', {userlist: results});
+		}else{
+			res.redirect('admin/home');
+		}
+	});
+});
+
+router.get('/editMadicine/:id', function(req, res){
+	adminModel.getByIdMadicine(req.params.id, function(result){
+		res.render('admin/editMadicine', {user: result});
+	});
+});
+
+router.post('/editMadicine/:id', function(req, res){
+	
+		var user = {
+			name: req.body.name,
+			catagory: req.body.catagory,
+			subCatagory: req.body.subcatagory,
+			vname: req.body.vname,
+			price: req.body.price,
+			quantity: req.body.quantity	
+		}
+
+		adminModel.updateMadicine(user, function(status){
+			if(status){
+				res.redirect('/admin/editMadicine/'+req.params.id);       
+			}else{
+				res.redirect('/admin/editMadicine/'+req.params.id);
+			}
+		});
+});
+
+router.get('/deleteMadicine/:id', function(req, res){
+	adminModel.deleteMadicine(req.params.id, function(status){
+		if(status){
+				console.log("Deleted Successfully!");
+				res.redirect('/admin/home');
+			}else{
+				res.redirect('/');
+			}
+		
+	});
+});
+
+
+
 
 
 

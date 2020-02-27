@@ -48,9 +48,9 @@ module.exports ={
 	getResults: function(sql, params, callback){
 		getConnection(function(connection){
 			if(params != null){
-				console.log(sql)
+				//console.log(sql)
 				connection.query(sql, params, function (error, results) {
-					console.log(results);
+					//console.log(results);
 					if(results.length != 0){
 						callback(results);
 					}else{

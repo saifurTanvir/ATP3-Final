@@ -18,11 +18,12 @@ router.post('/', function(req, res){
 		//console.log(results.type);
 	 	if(results.type == "admin"){
 			res.cookie('username', req.body.uname);
-			res.redirect('/admin/home/');
+			console.log(req.cookies['username']);
+			res.redirect('/admin/home');
 		}
 		else if(results.type == "customer"){
 			res.cookie('username', req.body.uname);
-			res.redirect('/customer/home/');
+			res.redirect('/customer/home');
 		}else{
 			res.send('invalid username/password');
 		}
